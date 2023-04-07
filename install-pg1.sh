@@ -3,38 +3,38 @@
 read -p "Podaj adres IP serwera głównego Netdata: " server_ip
 
 # Aktualizacja systemu
-sudo apt-get update
-sudo apt-get upgrade -y
+apt-get update
+apt-get upgrade -y
 
 # Instalacja zależności
-sudo apt-get install -y curl software-properties-common apt-transport-https
+apt-get install -y curl software-properties-common apt-transport-https
 
 # Dodanie repozytorium Grafana
-curl -s https://packages.grafana.com/gpg.key | sudo apt-key add -
-echo "deb https://packages.grafana.com/oss/deb stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list
+curl -s https://packages.grafana.com/gpg.key |   apt-key add -
+echo "deb https://packages.grafana.com/oss/deb stable main" |   tee -a /etc/apt/sources.list.d/grafana.list
 
 # Aktualizacja repozytoriów
-sudo apt-get update
+  apt-get update
 
 # Instalacja Prometheusa
-sudo apt-get install -y prometheus prometheus-node-exporter
+  apt-get install -y prometheus prometheus-node-exporter
 
 # Ustawienie właściciela dla katalogu Prometheusa
-sudo chown -R prometheus:prometheus /etc/prometheus
+  chown -R prometheus:prometheus /etc/prometheus
 
 # Ustawienie właściciela dla katalogu z danymi Prometheusa
-sudo chown -R prometheus:prometheus /var/lib/prometheus
+  chown -R prometheus:prometheus /var/lib/prometheus
 
 # Instalacja Grafana
-sudo apt-get install -y grafana
+  apt-get install -y grafana
 
 # Uruchamianie usług Grafana i Prometheusa podczas uruchamiania systemu
-sudo systemctl enable grafana-server
-sudo systemctl enable prometheus
+  systemctl enable grafana-server
+  systemctl enable prometheus
 
 # Uruchomienie usług Grafana i Prometheusa
-sudo systemctl start grafana-server
-sudo systemctl start prometheus
+  systemctl start grafana-server
+  systemctl start prometheus
 
 # Konfiguracja połączenia Grafana z Prometheusem
 sleep 10
